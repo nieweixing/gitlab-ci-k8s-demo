@@ -49,10 +49,10 @@ image_build:
     DOCKER_HOST: tcp://localhost:2375
   services:
     - name: docker:17.03-dind
-      command: ["--insecure-registry=registry.qikqiak.com"]
+      command: ["--insecure-registry=ccr.ccs.tencentyun.com"]
   script:
     - docker info
-    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" registry.qikqiak.com
+    - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" ccr.ccs.tencentyun.com
     - docker build -t "${CI_REGISTRY_IMAGE}:latest" .
     - docker tag "${CI_REGISTRY_IMAGE}:latest" "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
     - test ! -z "${CI_COMMIT_TAG}" && docker push "${CI_REGISTRY_IMAGE}:latest"
